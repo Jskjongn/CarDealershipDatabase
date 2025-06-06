@@ -1,0 +1,6 @@
+SELECT
+	V.*
+FROM
+	vehicles V
+WHERE
+	V.VIN = '94XLMVX8GVTLRI9J2';
