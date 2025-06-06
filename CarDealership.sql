@@ -40,3 +40,14 @@ CREATE TABLE `vehicles` (
     `SOLD` ENUM('YES', 'NO') DEFAULT NULL,
     CONSTRAINT `PK_VIN` PRIMARY KEY (`VIN`)
 );
+
+# ---------------------------------------------------------------------- #
+# Add table "inventory"                                                   #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE `inventory` (
+	`Dealership_ID` INTEGER NOT NULL,
+    `VIN` VARCHAR(17) NOT NULL,
+    CONSTRAINT `FK_Dealership_ID` FOREIGN KEY (`Dealership_ID`) REFERENCES `dealerships` (`Dealership_ID`),
+    CONSTRAINT `FK_VIN` FOREIGN KEY (`VIN`) REFERENCES `vehicles` (`VIN`)
+);
