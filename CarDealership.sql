@@ -42,12 +42,31 @@ CREATE TABLE `vehicles` (
 );
 
 # ---------------------------------------------------------------------- #
-# Add table "inventory"                                                   #
+# Add table "inventory"                                                  #
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `inventory` (
 	`Dealership_ID` INTEGER NOT NULL,
     `VIN` VARCHAR(17) NOT NULL,
     CONSTRAINT `FK_Dealership_ID` FOREIGN KEY (`Dealership_ID`) REFERENCES `dealerships` (`Dealership_ID`),
+    CONSTRAINT `FK_VIN` FOREIGN KEY (`VIN`) REFERENCES `vehicles` (`VIN`)
+);
+
+# ---------------------------------------------------------------------- #
+# Add table "sales_contracts"                                            #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE `sales_contracts` (
+	`Sales_Contract_ID` INTEGER NOT NULL AUTO_INCREMENT,
+	`Date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `Customer_Name` VARCHAR(50) NOT NULL,
+    `Customer_Email` VARCHAR(20) NOT NULL,
+    `VIN` VARCHAR(17) NOT NULL,
+    `Sales_Tax` DECIMAL(10,2) NOT NULL,
+    `Recording_Fee` INTEGER DEFAULT 100 NOT NULL,
+    `Processing_Fee` DECIMAL(10,2) NOT NULL,
+    `Financed` ENUM('YES', 'NO') DEFAULT NULL,
+    `Monthly_Payment` DECIMAL(10,2) DEFAULT NULL,
+    CONSTRAINT `PK_Sales_Contract_ID` PRIMARY KEY (`Sales_Contract_ID`),
     CONSTRAINT `FK_VIN` FOREIGN KEY (`VIN`) REFERENCES `vehicles` (`VIN`)
 );
